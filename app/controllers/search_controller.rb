@@ -5,8 +5,14 @@ class SearchController < ApplicationController
   end
 
   def search
-    puts "PARAMS = #{params}"
 
+    song_title = params[:song_title]
+    album_title = params[:album_title]
+    artist_name = params[:artist_name]
+
+    puts "song_title = #{song_title}"
+    puts "album_title = #{album_title}"
+    puts "artist_name = #{artist_name}"
 
     if params[:song_ids]
       songs = Song.where(find_ids_statement(params[:song_ids])).find_each

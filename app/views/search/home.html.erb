@@ -8,17 +8,17 @@
   <div class="row search-bar">
     <div class="col-sm-12 col-lg-4">
       <p>Song Title</p>
-      <input id="song" type="text"></input>
+      <input id="song" class="catalog-search" type="text"></input>
     </div>
 
     <div class="col-sm-12 col-lg-4">
       <p>Album Title</p>
-      <input id="album" type="text"></input>
+      <input id="album" class="catalog-search" type="text"></input>
     </div>
 
     <div class="col-sm-12 col-lg-4">
       <p>Artist Name</p>
-      <input id="artist" type="text"></input>
+      <input id="artist" class="catalog-search" type="text"></input>
     </div>
   </div>
 
@@ -40,52 +40,42 @@
 </div>
 
 <script>
-  var songIdsFromSongTitle = []
-  var songIdsFromAlbumTitle = []
-  var songIdsFromArtistName = []
-  var songTitleSort = false
-  var albumTitleSort = false
-  var artistNameSort = false
+
+  // PUT IN ONE LINE?
+  var songTitle = null;
+  var albumTitle = null;
+  var artistName = null;
+
+  $('.catalog-search').on('keyup', function(event) {
+    field = event.target.id;
+    query = event.target.value;
+    if (query.length > 2) {
+
+      switch(field) {
+        case 'song':
+          songTitle = query;
+          break
+        case 'album':
+          albumTitle = query;
+          break
+        case 'artist':
+          artistName = query;
+          break
+        }
+
+      updateSongResults();
+    }
+  });
 
   var updateSongResults = function() {
-
-    // var allSongsIds = new Array(0)
-
-    // // if (songTitleSort) {
-    // //   $.each(songIdsFromSongTitle, function(index,val){
-    // //     allSongsIds.push(val);
-    // //   });
-    // // }
-
-    // // // if (albumTitleSort) {
-    // // //   $.each(songIdsFromAlbumTitle, function(index,val){
-    // // //     allSongsIds.push(val);
-    // // //   });
-    // // // }
-
-    // // if (artistNameSort) {
-    // //   $.each(songIdsFromArtistName, function(index,val){
-    // //     allSongsIds.push(val);
-    // //   });
-    // // }
-
-    // // console.log('songTitleSort', songTitleSort);
-    // // console.log('albumTitleSort', albumTitleSort);
-    // // console.log('artistNameSort', artistNameSort);
-    // // console.log('before Ajax', allSongsIds);
-
-    // // var uniqueSongIds = Array.from(new Set(allSongsIds));
 
     $.ajax({
       url: "/search/",
       method: 'post',
       data: {
-        'songIdsFromSongTitle': songIdsFromSongTitle,
-        'songIdsFromAlbumTitle': songIdsFromAlbumTitle,
-        'songIdsFromArtistName': songIdsFromArtistName,
-        'songTitleSort': songTitleSort,
-        'albumTitleSort': albumTitleSort,
-        'artistNameSort': artistNameSort,
+        'song_title': songTitle,
+        'album_title': albumTitle,
+        'artist_name': artistName,
       },
       success: function(data) {
         console.log('data', data)
@@ -110,84 +100,5 @@
   var clearTable = function(){
     $('#results').html('<tr></tr>')
   }
-
-  // var searchBySong = function(query){
-  //   $.ajax({
-  //     url: "/songs/" + query,
-  //     success: function(data) {
-  //       songIdsFromSongTitle = data;
-  //       updateSongResults();
-  //     }
-  //   });  
-  //   console.log('songIdsFromSongTitle', songIdsFromSongTitle)
-  // }
-
-  // var searchByAlbum = function(query){
-  //   $.ajax({
-  //     url: "/albums/" + query,
-  //     success: function(data) {
-  //       // Array of arrays (albums have many songs) must be flattend with reduce
-  //       if (data.length != 0) {
-  //         songIdsFromAlbumTitle = data.reduce(function(a, b) {
-  //           return a.concat(b);
-  //         });
-  //       }
-  //       updateSongResults();
-  //     }
-  //   }); 
-  //   console.log('albumSongIds', songIdsFromAlbumTitle);
-  // }
-
-  // var searchByArtist = function(query){
-  //   $.ajax({
-  //     url: "/artists/" + query,
-  //     success: function(data) {
-  //       // Array of arrays (artists have many songs) must be flattend with reduce
-  //       if (data.length != 0) {
-  //         songIdsFromArtistName = data.reduce(function(a, b) {
-  //           return a.concat(b);
-  //         });
-  //       }
-  //       updateSongResults();
-  //     }
-  //   }); 
-  //   console.log('songIdsFromArtistName', songIdsFromArtistName);
-  // }
-
- // Event Listeners for Three Search Inputs (Song, Album, Artist)
- // TODO(JT) - could be DRYed up
-
-  $('#song').on('keyup', function(event) {
-    query = event.target.value;
-    if (query.length > 2) {
-      songTitleSort = true;
-      searchBySong(query);
-    } else {
-      songTitleSort = false
-      clearTable();
-    }
-  });
-
-  $('#album').on('keyup', function(event) {
-    query = event.target.value;
-    if (query.length > 2) {
-      albumTitleSort = true;
-      searchByAlbum(query);
-    } else {
-      albumTitleSort = false;
-      clearTable();
-    }
-  });
-
-  $('#artist').on('keyup', function(event) {
-    query = event.target.value;
-    if (query.length > 2) {
-      artistNameSort = true;
-      searchByArtist(query);
-    } else {
-      artistNameSort = false;
-      clearTable();
-    }
-  });
 
 </script>
