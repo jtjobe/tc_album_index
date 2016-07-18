@@ -4,12 +4,12 @@ end
 
 Artist.all.each do |artist|
   10.times do
-    artist.albums.create(title: Faker::Hipster.words(2).map(&:capitalize).join(' '))
+    artist.albums.create(album_title: Faker::Hipster.words(2).map(&:capitalize).join(' '))
   end
 end
 
 Album.all.each do |album|
   5.times do 
-    album.songs.create(title: Faker::Hipster)
+    album.songs.create(song_title: Faker::Hipster.word.capitalize)
   end
 end

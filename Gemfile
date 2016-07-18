@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'annotate'
 gem 'faker'
 gem 'rspec'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'gon'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
