@@ -28,7 +28,7 @@ FactoryGirl.define do
     # IMPORTANT - a lot of tests depend on the exact setup below, 
     # change carefully and re-check and adjust tests as you proceed
     #
-    # creates an artist with two albums with 2 songs each
+    # creates an artist with two albums, one with 2 songs, one with 3 songs
     trait :two_album_artist do
       after(:create) do |artist|
         2.times do |x|
