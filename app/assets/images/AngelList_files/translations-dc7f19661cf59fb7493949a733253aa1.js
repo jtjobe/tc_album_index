@@ -1,0 +1,1 @@
+(function(){define(["rollbar","jquery"],function(t,e){return{init:function(){return setInterval(function(){return e("span.translation_missing").each(function(){var n;return e(this).data("translations_logged")?void 0:(n=e(this).attr("title"),t.warn(n),"undefined"!=typeof console&&null!==console&&console.warn(n),e(this).data("translations_logged",!0))})},1e4)}}})}).call(this);

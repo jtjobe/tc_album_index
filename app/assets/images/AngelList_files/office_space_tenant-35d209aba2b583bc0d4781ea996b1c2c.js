@@ -1,0 +1,1 @@
+(function(){define(["models/base"],function(t){return t("OfficeSpaceTenant")})}).call(this);

@@ -1,0 +1,1 @@
+(function(){var t=[].slice;define([],function(){return null!=window._gaq?{push:function(){var e,n;return e=1<=arguments.length?t.call(arguments,0):[],null!=(n=window._gaq)?n.push.apply(window._gaq,e):void 0}}:[]})}).call(this);

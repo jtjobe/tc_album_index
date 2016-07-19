@@ -14,4 +14,6 @@ class Album < ActiveRecord::Base
   has_many :songs
   
   validates :album_title, presence: true
+  validates :artist_id, presence: true
+  
 end

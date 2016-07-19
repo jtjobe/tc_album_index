@@ -1,0 +1,1 @@
+(function(){define(["lib/environment"],function(t){return{init:function(){return window.console&&!t.isDevelopment()?window.console.log("Do you have a great idea that would make AngelList better?  Want to implement it?  We\u2019re always hiring: https://angel.co/angellist/jobs"):void 0}}})}).call(this);

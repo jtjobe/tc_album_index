@@ -1,0 +1,1 @@
+(function(){define(["jquery","css!facybox/facybox","css!coffeescripts/plugins/facybox"],function(){return{init:function(){}}})}).call(this);

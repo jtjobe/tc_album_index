@@ -1,0 +1,1 @@
+(function(){define(["initializer","jquery","global/all"],function(t,e,n){return e(function(){var e,i,r,o;for(i=0,o=n.length;o>i;i++)e=n[i],e.init();return r=t.instance(),r.scan().listen()})})}).call(this);

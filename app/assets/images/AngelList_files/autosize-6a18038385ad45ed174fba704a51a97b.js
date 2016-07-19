@@ -1,0 +1,1 @@
+(function(){define(["jquery","jquery.autosize"],function(t){return{init:function(){return t(document).on("focus","textarea",function(){return t(this).is(".autogrow")?t(this).autosize():void 0})}}})}).call(this);

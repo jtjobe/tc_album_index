@@ -1,0 +1,1 @@
+(function(){define([],function(){return window.jQuery||function(){throw new Error("jQuery must be loaded in the document head")}()})}).call(this);

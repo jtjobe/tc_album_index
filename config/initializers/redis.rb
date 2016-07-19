@@ -1,0 +1,1 @@
+$redis = Redis::Namespace.new("album_index", :redis => Redis.new)

@@ -16,4 +16,6 @@ class Song < ActiveRecord::Base
   delegate :artist, to: :album
 
   validates :song_title, presence: true
+  validates :album_id, presence: true
+  
 end

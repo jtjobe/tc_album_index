@@ -1,0 +1,1 @@
+(function(){define(["jquery","lib/partials"],function(t,e){return function(n,i){return e["with"](t(e.selector("layouts/flashes")),function(t){return t.flash(n,i)})}})}).call(this);

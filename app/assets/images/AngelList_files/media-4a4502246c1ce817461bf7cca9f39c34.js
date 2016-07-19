@@ -1,0 +1,1 @@
+(function(){define(["require"],function(t){return{init:function(){return t(["jquery","lib/media"],function(t,e){return e.detect(),t(window).resize(function(){return e.detect()})})}}})}).call(this);

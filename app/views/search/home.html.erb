@@ -22,6 +22,8 @@
     </div>
   </div>
 
+  <p id="text-results">Test</p>
+
   <div class="row">
     <div class="col-sm-12">
       <table class="table table-striped table-bordered">
@@ -40,55 +42,21 @@
 </div>
 
 <script>
-  var songIdsFromSongTitle = []
-  var songIdsFromAlbumTitle = []
-  var songIdsFromArtistName = []
-  var songTitleSort = false
-  var albumTitleSort = false
-  var artistNameSort = false
+  var songTitle, albumTitle, artistName
 
   var updateSongResults = function() {
-
-    // var allSongsIds = new Array(0)
-
-    // // if (songTitleSort) {
-    // //   $.each(songIdsFromSongTitle, function(index,val){
-    // //     allSongsIds.push(val);
-    // //   });
-    // // }
-
-    // // // if (albumTitleSort) {
-    // // //   $.each(songIdsFromAlbumTitle, function(index,val){
-    // // //     allSongsIds.push(val);
-    // // //   });
-    // // // }
-
-    // // if (artistNameSort) {
-    // //   $.each(songIdsFromArtistName, function(index,val){
-    // //     allSongsIds.push(val);
-    // //   });
-    // // }
-
-    // // console.log('songTitleSort', songTitleSort);
-    // // console.log('albumTitleSort', albumTitleSort);
-    // // console.log('artistNameSort', artistNameSort);
-    // // console.log('before Ajax', allSongsIds);
-
-    // // var uniqueSongIds = Array.from(new Set(allSongsIds));
 
     $.ajax({
       url: "/search/",
       method: 'post',
       data: {
-        'songIdsFromSongTitle': songIdsFromSongTitle,
-        'songIdsFromAlbumTitle': songIdsFromAlbumTitle,
-        'songIdsFromArtistName': songIdsFromArtistName,
-        'songTitleSort': songTitleSort,
-        'albumTitleSort': albumTitleSort,
-        'artistNameSort': artistNameSort,
+        'song_title': songTitle,
+        'album_title': albumTitle,
+        'artist_name': artistName,
       },
       success: function(data) {
-        console.log('data', data)
+        console.log('data', data);
+        console.log('typeof(data)', typeof(data));
         updateTableWithResults(data);
       }
     });
@@ -97,11 +65,12 @@
   var updateTableWithResults = function(data) {
     clearTable();
     $.each(data, function(index,element) { 
+      console.log("ELEMENT", typeof(element));
       $('#results')
         .append('<tr>' +
-                  '<td>' + element["song"] + '</td>' +
-                  '<td>' + element["album"] + '</td>' +
-                  '<td>' + element["artist"] + '</td>' +
+                  '<td>' + element["song_title"] + '</td>' +
+                  '<td>' + element["album_title"] + '</td>' +
+                  '<td>' + element["artist_name"] + '</td>' +
                 '</tr>'
         );
     });
@@ -111,83 +80,31 @@
     $('#results').html('<tr></tr>')
   }
 
-  // var searchBySong = function(query){
-  //   $.ajax({
-  //     url: "/songs/" + query,
-  //     success: function(data) {
-  //       songIdsFromSongTitle = data;
-  //       updateSongResults();
-  //     }
-  //   });  
-  //   console.log('songIdsFromSongTitle', songIdsFromSongTitle)
-  // }
-
-  // var searchByAlbum = function(query){
-  //   $.ajax({
-  //     url: "/albums/" + query,
-  //     success: function(data) {
-  //       // Array of arrays (albums have many songs) must be flattend with reduce
-  //       if (data.length != 0) {
-  //         songIdsFromAlbumTitle = data.reduce(function(a, b) {
-  //           return a.concat(b);
-  //         });
-  //       }
-  //       updateSongResults();
-  //     }
-  //   }); 
-  //   console.log('albumSongIds', songIdsFromAlbumTitle);
-  // }
-
-  // var searchByArtist = function(query){
-  //   $.ajax({
-  //     url: "/artists/" + query,
-  //     success: function(data) {
-  //       // Array of arrays (artists have many songs) must be flattend with reduce
-  //       if (data.length != 0) {
-  //         songIdsFromArtistName = data.reduce(function(a, b) {
-  //           return a.concat(b);
-  //         });
-  //       }
-  //       updateSongResults();
-  //     }
-  //   }); 
-  //   console.log('songIdsFromArtistName', songIdsFromArtistName);
-  // }
-
  // Event Listeners for Three Search Inputs (Song, Album, Artist)
  // TODO(JT) - could be DRYed up
 
   $('#song').on('keyup', function(event) {
     query = event.target.value;
-    if (query.length > 2) {
-      songTitleSort = true;
-      searchBySong(query);
-    } else {
-      songTitleSort = false
-      clearTable();
-    }
+    // if (query.length > 0) {
+      songTitle = query;
+      updateSongResults();
+    // }
   });
 
   $('#album').on('keyup', function(event) {
     query = event.target.value;
-    if (query.length > 2) {
-      albumTitleSort = true;
-      searchByAlbum(query);
-    } else {
-      albumTitleSort = false;
-      clearTable();
-    }
+    // if (query.length > 0) {
+      albumTitle = query;
+      updateSongResults();
+    // }
   });
 
   $('#artist').on('keyup', function(event) {
     query = event.target.value;
-    if (query.length > 2) {
-      artistNameSort = true;
-      searchByArtist(query);
-    } else {
-      artistNameSort = false;
-      clearTable();
-    }
+    // if (query.length > 0) {
+      artistName = query;
+      updateSongResults();
+    // }
   });
 
 </script>

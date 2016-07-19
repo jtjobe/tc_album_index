@@ -1,0 +1,1 @@
+(function(){define(["models/base"],function(t){return t("JobListing")})}).call(this);

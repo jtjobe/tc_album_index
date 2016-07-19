@@ -1,0 +1,1 @@
+(function(){define(["jquery","jquery.form"],function(t){return{init:function(){return t(function(){return t(document).on("submit","form",function(e){return e.isPropagationStopped()?void 0:t(this).find(":submit").prop("disabled",!0)})})}}})}).call(this);

@@ -1,0 +1,1 @@
+(function(){define(["require"],function(t){return{init:function(){if(null==window._eventQueueClear)throw new Error("Expected _eventQueueClear to be initialized in the document head");return window._eventQueueClear(t)}}})}).call(this);
